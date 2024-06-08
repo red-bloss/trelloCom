@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{head.html}">
+</head>
+<body>
+<div class="container" th:insert="~{navbar.html}">
+</div>
+<div class="container mt-3 ">
+    <div class="row">
+        <div class="col ms-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                + Add new folder
+            </button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form th:action="@{'/trello/addFolder'}" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add new folder</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label>FOLDER NAME:</label>
+                        <input type="text" name="folder" class="form-control" placeholder="FOLDER NAME:">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">ADD FOLDER</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-3 ms-2" th:each="folder: ${folders}">
+            <div class="row mt-3">
+                <div class="col-12" >
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${folder.getName()}"></h5>
+                            <a th:href="@{'/trello/details/'+ ${folder.getId()}}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" href="/js/bootstrap.bundle.js" >
+</script>
+</html>
